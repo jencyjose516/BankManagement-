@@ -28,7 +28,7 @@ public class BankManagment {
                       
               case 2: op.doDeposit();
               		 break;
-              case 3: op.doWithdraw();
+              case 3: op.displayBalance();
                       break;
                       
 					/*

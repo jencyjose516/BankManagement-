@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,32 +87,14 @@ public class BankOperations {
 	public void doDeposit() throws IOException, ClassNotFoundException {
 		 ArrayList<Customer> recordList = new ArrayList();
 		 
-		 System.out.println("Enter the customer ID:");
-		 int customerID= scanner.nextInt(); 
-		 System.out.println("Enter Account Number");
-		 int acNo = scanner.nextInt();
-		 System.out.print("Enter Amount Of Money : ");
-         int balance=scanner.nextInt();
-		 FileInputStream fis = new FileInputStream("out.txt");
-	        ObjectInputStream ois = new ObjectInputStream(fis);
-	        while(fis.available() > 0) {
-	            try {
-	            	recordList = (ArrayList<Customer>) ois.readObject();
-	                recordList.forEach(ob->{
-	                	if(customerID==ob.getCustomerID()&&acNo==ob.getAccountNumber()) {
-	                		ob.setBalance(ob.getBalance()+balance);
-	     
-	                	}
-	                	
-	                });
-	                doWriteFile(recordList);
-	                displayBalance(customerID,acNo);
-	            } catch (ClassNotFoundException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        ois.close();
-	        
+			
+			  System.out.println("Enter the customer ID:"); int customerID=
+			  scanner.nextInt(); System.out.println("Enter Account Number"); int acNo =
+			  scanner.nextInt(); System.out.print("Enter Amount Of Money : "); int
+			  balance=scanner.nextInt();
+			 // deposit shoould be done
+		
+	       
 	        
 	}
 
@@ -119,25 +103,28 @@ public class BankOperations {
 		
 	}
 
-	public void displayBalance(int customerID, int acNo) throws IOException {
-	
-			 ArrayList<Customer> recordList = new ArrayList();
-			 
-			 FileInputStream fis = new FileInputStream("out.txt");
-		        ObjectInputStream ois = new ObjectInputStream(fis);
-		        while(fis.available() > 0) {
-		            try {
-		            	recordList = (ArrayList<Customer>) ois.readObject();
-		            	recordList.forEach(obj->{
-		            		if(customerID==obj.getCustomerID()&&acNo==obj.getAccountNumber())
-			            		System.out.println(obj.toString());
-		            	});
-		            	
-		                
-		            } catch (ClassNotFoundException e) {
-		                e.printStackTrace();
-		            }
-		        }
+	public void displayBalance() throws IOException {
+		
+		System.out.println("Enter the customer ID:");
+		int customerID = scanner.nextInt();
+		System.out.println("Enter Account Number");
+		int acNo = scanner.nextInt();
+		ArrayList<Customer> recordList = new ArrayList();
+
+		FileInputStream fis = new FileInputStream("out.txt");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		while (fis.available() > 0) {
+			try {
+				recordList = (ArrayList<Customer>) ois.readObject();
+				recordList.forEach(obj -> {
+					if (customerID == obj.getCustomerID() && acNo == obj.getAccountNumber())
+						System.out.println(obj.getBalance());
+				});
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 		      
 	}
 
