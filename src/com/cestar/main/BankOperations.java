@@ -1,24 +1,17 @@
 package com.cestar.main;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 import com.cestar.model.Customer;
-
-import jdk.jfr.FlightRecorderListener;
 
 public class BankOperations {
 
@@ -65,8 +58,8 @@ public class BankOperations {
 	private void doWriteFile(ArrayList<Customer> listObj) {
 		 FileWriter fstream;
 		try {
-			 boolean exists = new File("out.txt").exists();
-		        FileOutputStream fos = new FileOutputStream("out.txt", true);
+			 boolean exists = new File("customer.txt").exists();
+		        FileOutputStream fos = new FileOutputStream("customer.txt", true);
 		        ObjectOutputStream oos = exists ? 
 		            new ObjectOutputStream(fos) {
 		                protected void writeStreamHeader() throws IOException {
@@ -87,19 +80,42 @@ public class BankOperations {
 	public void doDeposit() throws IOException, ClassNotFoundException {
 		 ArrayList<Customer> recordList = new ArrayList();
 		 
-			
+		 ArrayList<Customer> newList = new ArrayList<>();
 			  System.out.println("Enter the customer ID:"); int customerID=
 			  scanner.nextInt(); System.out.println("Enter Account Number"); int acNo =
 			  scanner.nextInt(); System.out.print("Enter Amount Of Money : "); int
 			  balance=scanner.nextInt();
-			 // deposit shoould be done
-		
+			  FileInputStream fis = new FileInputStream("customer.txt");
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				while (fis.available() > 0) {
+					try {
+						recordList = (ArrayList<Customer>) ois.readObject();
+						recordList.forEach(obj -> {
+							if (customerID == obj.getCustomerID() && acNo == obj.getAccountNumber())	
+							{
+								obj.setBalance(balance+obj.getBalance());
+							}
+							
+							newList.add(obj);
+							
+							
+						});
+						
+						 FileOutputStream fos = new FileOutputStream("customer.txt");
+						  ObjectOutputStream oos = new ObjectOutputStream(fos);
+						  oos. writeObject(newList); // write MenuArray to ObjectOutputStream.
+						  oos. close();
+
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
 	       
 	        
 	}
 
 	public void doWithdraw() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -111,13 +127,13 @@ public class BankOperations {
 		int acNo = scanner.nextInt();
 		ArrayList<Customer> recordList = new ArrayList();
 
-		FileInputStream fis = new FileInputStream("out.txt");
+		FileInputStream fis = new FileInputStream("customer.txt");
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		while (fis.available() > 0) {
 			try {
 				recordList = (ArrayList<Customer>) ois.readObject();
 				recordList.forEach(obj -> {
-					if (customerID == obj.getCustomerID() && acNo == obj.getAccountNumber())
+					/* if (customerID == obj.getCustomerID() && acNo == obj.getAccountNumber()) */
 						System.out.println(obj.getBalance());
 				});
 
