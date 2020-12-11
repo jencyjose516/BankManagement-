@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.cestar.constants.AccountType;
 import com.cestar.model.Customer;
 
 public class BankOperations {
@@ -27,11 +28,12 @@ public class BankOperations {
         System.out.print("Enter Accout Type : 1. Savings, 2. Chequing, 3. Current");
         int choice = scanner.nextInt();
         if (choice ==1)
-        	customer.setAccountType("SAV");
+        	
+        	customer.setAccountType(AccountType.SAVINGS_ACCOUNT.getAccountType());
         else if(choice==2)
-        	customer.setAccountType("CHE");
+        	customer.setAccountType(AccountType.CHEQUEING_ACCOUNT.getAccountType());
         else
-        	customer.setAccountType("CUR");
+        	customer.setAccountType(AccountType.CURRENT_ACCOUNT.getAccountType());
         customer.setAccountNumber((int)((Math.random() * 9000)+10000));
         customer.setCustomerID((int)((Math.random() * 9000)+200));
         System.out.print("Enter your Mobile Number : ");
@@ -68,7 +70,24 @@ public class BankOperations {
 		            }:new ObjectOutputStream(fos);
 			 oos.writeObject(listObj);
 			 oos.close();
-		} catch (IOException e) {
+			 ArrayList<Customer> recordList = new ArrayList();
+			 
+			 FileInputStream fis = new FileInputStream("customer.txt");
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				while (fis.available() > 0) {
+					try {
+						recordList = (ArrayList<Customer>) ois.readObject();
+						recordList.forEach(obj -> {
+							/* if (customerID == obj.getCustomerID() && acNo == obj.getAccountNumber()) */
+								System.out.println(obj.toString());
+						});
+
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+				}	
+		}	
+		 catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -121,10 +140,11 @@ public class BankOperations {
 
 	public void displayBalance() throws IOException {
 		
-		System.out.println("Enter the customer ID:");
-		int customerID = scanner.nextInt();
-		System.out.println("Enter Account Number");
-		int acNo = scanner.nextInt();
+		/*
+		 * System.out.println("Enter the customer ID:"); int customerID =
+		 * scanner.nextInt(); System.out.println("Enter Account Number"); int acNo =
+		 * scanner.nextInt();
+		 */
 		ArrayList<Customer> recordList = new ArrayList();
 
 		FileInputStream fis = new FileInputStream("customer.txt");
@@ -134,13 +154,13 @@ public class BankOperations {
 				recordList = (ArrayList<Customer>) ois.readObject();
 				recordList.forEach(obj -> {
 					/* if (customerID == obj.getCustomerID() && acNo == obj.getAccountNumber()) */
-						System.out.println(obj.getBalance());
+						System.out.println(obj.toString());
 				});
 
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-		}
+		}	
 		      
 	}
 

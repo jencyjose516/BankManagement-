@@ -11,6 +11,7 @@ public class BankManagment {
 		  int choice=1;
 		  BankOperations op= new BankOperations();
 		  do {
+			  System.out.println("Please chhose any of the option from below:");
 			  System.out.println("1. Create Account");
               System.out.println("2. Deposit money");
               System.out.println("3. Withdraw money");
@@ -40,10 +41,14 @@ public class BankManagment {
                
               case 6 : op.payBills();
               break;
-              default: break;
+			default: /*
+						 * System.out.print("Press any key other than 7 if you need to continue : ");
+						 * choice = scanner.nextInt();
+						 */
+              break;
        
               }
-		  }while(choice==6);
+		  }while(choice!=7);
 
 	}
 
