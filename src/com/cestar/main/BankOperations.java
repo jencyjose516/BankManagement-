@@ -118,7 +118,32 @@ public class BankOperations {
 	}
 
 	public void doDeposit() throws IOException, ClassNotFoundException {
-		//jithu has to do the implementation
+		try {
+			Set<Customer> recordSet = new HashSet<Customer>();
+			ArrayList<Customer> newList = new ArrayList<>();
+
+			int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+
+			int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
+
+			int balance = Integer.parseInt(JOptionPane.showInputDialog("Enter the amount"));
+
+			recordSet = readFile();
+			for (Customer customer : recordSet) {
+				if (customer.getCustomerID() == customerID && acNo == customer.getAccountNumber()) {
+					customer.setBalance(balance + customer.getBalance());
+					// newList.add(customer);
+					doWriteFile(customer);
+					JOptionPane.showMessageDialog(null,
+							"Hi " + customer.getCustomerName() + "\nMoney has deposited to your account");
+
+					break;
+				}
+
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Invalid Data");
+		}
 	}
 
 	public void doWithdraw() throws IOException {
