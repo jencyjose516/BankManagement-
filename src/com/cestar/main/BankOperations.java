@@ -206,7 +206,42 @@ public class BankOperations {
 	}
 
 	public void doTransfer() {
-		//chinju has to do the implementation
+		try {
+			
+			int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+			
+			int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
+
+			
+			int benAccNumber = Integer.parseInt(JOptionPane.showInputDialog("Enter Beneficiery Account Number"));
+
+		
+			double amount = Double.parseDouble(JOptionPane.showInputDialog("Enter Money to transfer"));
+
+			Set<Customer> existingRecord = new HashSet<>();
+
+			existingRecord = readFile();
+			for (Customer customer : existingRecord) {
+
+				if (customerID == customer.getCustomerID() && acNo == customer.getAccountNumber()) {
+					customer.setBalance(customer.getBalance() - amount);
+					doWriteFile(customer);
+					JOptionPane.showMessageDialog(null,
+							"Hi " + customer.getCustomerName() + "\nYou have transferred " + amount);
+				
+				} else if (customer.getAccountNumber() == benAccNumber) {
+					customer.setBalance(customer.getBalance() + amount);
+					doWriteFile(customer);
+					JOptionPane.showMessageDialog(null,
+							"Hi " + customer.getCustomerName() + "\n" + amount + " has deposited to your account ");
+					
+				}
+
+				break;
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 	public void payBills() {
