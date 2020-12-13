@@ -27,8 +27,31 @@ public class Customer implements Serializable{
 	private String addressLine1;
 	private String country;
 	private String state;
+	private Date lastUtility;
+	private Date nextUtility;
+	private double utilityAmount;
+	private int utilityCycle;
+	private String postalCode;
 	
 	
+	public String getPostalCode() {
+		return postalCode;
+	}
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+	public int getUtilityCycle() {
+		return utilityCycle;
+	}
+	public void setUtilityCycle(int utilityCycle) {
+		this.utilityCycle = utilityCycle;
+	}
+	public double getUtilityAmount() {
+		return utilityAmount;
+	}
+	public void setUtilityAmount(double utilityAmount) {
+		this.utilityAmount = utilityAmount;
+	}
 	public int getCustomerID() {
 		return customerID;
 	}
@@ -38,9 +61,12 @@ public class Customer implements Serializable{
 	public Customer() {
 		super();
 	}
-	public Customer(String customerName, int accountNumber, String accountType, Date openDate, Float balance,
-			String contact, String email, String addressLine1, String country, String state, int customerID) {
+	
+	public Customer(int customerID, String customerName, int accountNumber, String accountType, Date openDate,
+			double balance, String contact, String email, String addressLine1, String country, String state,
+			Date lastUtility, Date nextUtility, double utilityAmount) {
 		super();
+		this.customerID = customerID;
 		this.customerName = customerName;
 		this.accountNumber = accountNumber;
 		this.accountType = accountType;
@@ -51,7 +77,9 @@ public class Customer implements Serializable{
 		this.addressLine1 = addressLine1;
 		this.country = country;
 		this.state = state;
-		this.customerID= customerID;
+		this.lastUtility = lastUtility;
+		this.nextUtility = nextUtility;
+		this.utilityAmount=utilityAmount;
 	}
 	public String getCustomerName() {
 		return customerName;
@@ -113,12 +141,27 @@ public class Customer implements Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "Customer [customerID=" + customerID + ", customerName=" + customerName + ", accountNumber="
 				+ accountNumber + ", accountType=" + accountType + ", openDate=" + openDate + ", balance=" + balance
 				+ ", contact=" + contact + ", email=" + email + ", addressLine1=" + addressLine1 + ", country="
-				+ country + ", state=" + state + "]";
+				+ country + ", state=" + state + ", lastUtility=" + lastUtility + ", nextUtility=" + nextUtility
+				+ ", utilityAmount=" + utilityAmount + "]";
+	}
+	public Date getLastUtility() {
+		return lastUtility;
+	}
+	public void setLastUtility(Date lastUtility) {
+		this.lastUtility = lastUtility;
+	}
+	public Date getNextUtility() {
+		return nextUtility;
+	}
+	public void setNextUtility(Date nextUtility) {
+		this.nextUtility = nextUtility;
 	}
 	
 	
