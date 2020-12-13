@@ -147,7 +147,31 @@ public class BankOperations {
 	}
 
 	public void doWithdraw() throws IOException {
-		//jithu has to do the impl
+		Set<Customer> recordSet = new HashSet<Customer>();
+
+		ArrayList<Customer> newList = new ArrayList<>();
+
+		int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+
+		int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
+
+		int withdrawMoney = Integer.parseInt(JOptionPane.showInputDialog("Enter the amount"));
+		float chargingFee = chargingFee(withdrawMoney);
+
+		recordSet = readFile();
+		for (Customer customer : recordSet) {
+			if (customer.getCustomerID() == customerID && acNo == customer.getAccountNumber()) {
+				customer.setBalance(customer.getBalance() - withdrawMoney - chargingFee);
+				// newList.add(customer);
+				doWriteFile(customer);
+
+				JOptionPane.showMessageDialog(null, "Hi " + customer.getCustomerName() + "\nYou have withdrawn "
+						+ withdrawMoney + " . You have charged a fee of " + chargingFee);
+
+				break;
+			}
+
+		}
 	}
 
 	private float chargingFee(int withdrawMoney) {
