@@ -189,7 +189,20 @@ public class BankOperations {
 	}
 
 	public void displayBalance() throws IOException {
-		//akhil has to do the implementation
+		int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+		int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
+
+		Set<Customer> existingRecord = new HashSet<>();
+
+		existingRecord = readFile();
+		for (Customer customer : existingRecord) {
+
+			if (customerID == customer.getCustomerID() && acNo == customer.getAccountNumber()) {
+				JOptionPane.showMessageDialog(null,
+						"Hi " + customer.getCustomerName() + "\nYour total balance is: " + customer.getBalance());
+			}
+
+		}
 	}
 
 	public void doTransfer() {
