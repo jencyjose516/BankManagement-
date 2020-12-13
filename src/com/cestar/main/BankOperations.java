@@ -301,7 +301,30 @@ public class BankOperations {
 	}
 
 	public void editAddress() {
-		//Akhil has to do the implementation
+		Set<Customer> existingRecord = new HashSet<>();
+		int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+		int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
+		String addresLine1 = JOptionPane.showInputDialog("Enter Adress Line 1");
+		String province = JOptionPane.showInputDialog("Enter Province");
+		String postalCode = JOptionPane.showInputDialog("Enter Postal Code");
+		try {
+			existingRecord = readFile();
+			for (Customer customer : existingRecord) {
+				if (customerID == customer.getCustomerID() && acNo == customer.getAccountNumber()) {
+					
+					customer.setAddressLine1(addresLine1);
+					customer.setPostalCode(postalCode);
+					customer.setState(province);
+					doWriteFile(customer);
+					
+					JOptionPane.showMessageDialog(null, " Hi " + customer.getCustomerName() + " \n You have updated your contact details. Thank you !");
+				}
+					
+				}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
