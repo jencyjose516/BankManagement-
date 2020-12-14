@@ -32,7 +32,6 @@ public class BankOperations {
 	public void createAccount() {
 
 		try {
-			ArrayList<Customer> listObj = new ArrayList<>();
 			Customer customer = new Customer();
 
 			customer.setCustomerName(JOptionPane.showInputDialog("Enter your Name : "));
@@ -69,7 +68,6 @@ public class BankOperations {
 			customer.setState(JOptionPane.showInputDialog("Enter your Province"));
 			customer.setOpenDate(date);
 			customer.setBalance(0.0);
-			listObj.add(customer);
 
 			JOptionPane.showMessageDialog(null, "Hi " + customer.getCustomerName()
 					+ "\nYou have created a record succesfully. \n Your Customer ID is:   " + customer.getCustomerID()
@@ -105,7 +103,6 @@ public class BankOperations {
 			}
 
 			newRecordSet.add(newCustomerObject);
-			// System.out.println("new records are:"+newCustomerObject.toString());
 			FileOutputStream fos = new FileOutputStream("out.txt");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(newRecordSet);
@@ -132,7 +129,6 @@ public class BankOperations {
 			for (Customer customer : recordSet) {
 				if (customer.getCustomerID() == customerID && acNo == customer.getAccountNumber()) {
 					customer.setBalance(balance + customer.getBalance());
-					// newList.add(customer);
 					doWriteFile(customer);
 					JOptionPane.showMessageDialog(null,
 							"Hi " + customer.getCustomerName() + "\nMoney has deposited to your account");
@@ -162,7 +158,7 @@ public class BankOperations {
 		for (Customer customer : recordSet) {
 			if (customer.getCustomerID() == customerID && acNo == customer.getAccountNumber()) {
 				customer.setBalance(customer.getBalance() - withdrawMoney - chargingFee);
-				// newList.add(customer);
+				
 				doWriteFile(customer);
 
 				JOptionPane.showMessageDialog(null, "Hi " + customer.getCustomerName() + "\nYou have withdrawn "
@@ -178,7 +174,7 @@ public class BankOperations {
 
 		float chargingFee = (float) (withdrawMoney * 0.0001);
 		return chargingFee;
-		// TODO Auto-generated method stub
+	
 
 	}
 
@@ -271,11 +267,8 @@ public class BankOperations {
 	public void payBills() {
 
 		try {
-			/*
-			 * System.out.println("Please login:\n=========================");
-			 * System.out.println("Enter the customer ID:");
-			 */ int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
-			// System.out.println("Enter Account Number");
+			 int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+			
 			int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
 			Set<Customer> existingRecord = new HashSet<>();
 			existingRecord = readFile();
@@ -283,8 +276,7 @@ public class BankOperations {
 				if (customerID == customer.getCustomerID() && acNo == customer.getAccountNumber()) {
 					JOptionPane.showMessageDialog(null,
 							"Your next Utility Bill date is : " + customer.getNextUtility());
-					// System.out.println("Your next Utility Bill date is :"+
-					// customer.getNextUtility());
+					
 					Date todayDate = Calendar.getInstance().getTime();
 					SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
 					Date currentDate = sm.parse(sm.format(todayDate));
@@ -302,8 +294,7 @@ public class BankOperations {
 
 						JOptionPane.showMessageDialog(null, " Hi " + customer.getCustomerName() + " \n"
 								+ "You have Paid the utility bill of " + customer.getUtilityAmount());
-						// System.out.println(" Hi" + customer.getCustomerName() + " " + "You have Paid
-						// the utility bill of" + customer.getUtilityAmount());
+						
 						break;
 					}
 				}
@@ -318,20 +309,17 @@ public class BankOperations {
 			Set<Customer> existingRecord = new HashSet<>();
 			SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
 
-			/*
-			 * System.out.println("Please login:\n=========================");
-			 * System.out.println("Enter the customer ID:");
-			 */int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
-			// System.out.println("Enter Account Number");
+			int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+			
 			int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
 
-			// System.out.println("Enter the utility amount");
+			
 			double amount = Double.parseDouble(JOptionPane.showInputDialog("Enter the utility amount"));
 
-			// System.out.println("Enter the utility cycle in days");
+			
 			int cycle = Integer.parseInt(JOptionPane.showInputDialog("Enter the utility cycle in days"));
 
-			// System.out.println("Enter the next utility bill date in yyyy-MM-dd Format");
+			
 			String utilDate = JOptionPane.showInputDialog("Enter the next utility bill date in yyyy-MM-dd Format");
 
 			Date nextUtilDate = sm.parse(utilDate);
