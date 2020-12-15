@@ -143,14 +143,7 @@ public class Customer implements Serializable{
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "Customer [customerID=" + customerID + ", customerName=" + customerName + ", accountNumber="
-				+ accountNumber + ", accountType=" + accountType + ", openDate=" + openDate + ", balance=" + balance
-				+ ", contact=" + contact + ", email=" + email + ", addressLine1=" + addressLine1 + ", country="
-				+ country + ", state=" + state + ", lastUtility=" + lastUtility + ", nextUtility=" + nextUtility
-				+ ", utilityAmount=" + utilityAmount + "]";
-	}
+	
 	public Date getLastUtility() {
 		return lastUtility;
 	}
@@ -162,6 +155,14 @@ public class Customer implements Serializable{
 	}
 	public void setNextUtility(Date nextUtility) {
 		this.nextUtility = nextUtility;
+	}
+	@Override
+	public String toString() {
+		return "Customer details are : customerID=" + customerID + ", customerName=" + customerName + ", accountNumber="
+				+ accountNumber + "\n accountType=" + accountType + ", openDate=" + openDate + ", balance=" + balance
+				+ ", contact=" + contact + "\n email=" + email + ", addressLine1=" + addressLine1 + ", country="
+				+ country + ", state=" + state + "\n lastUtility=" + lastUtility + ", nextUtility=" + nextUtility
+				+ ", utilityAmount=" + utilityAmount + ", utilityCycle=" + utilityCycle + ", postalCode=" + postalCode;
 	}
 	
 	

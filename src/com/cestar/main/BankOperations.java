@@ -378,5 +378,25 @@ public class BankOperations {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void displayDetails() {
+		Set<Customer> existingRecord = new HashSet<>();
+		int customerID = Integer.parseInt(JOptionPane.showInputDialog("Enter your Customer ID : "));
+		int acNo = Integer.parseInt(JOptionPane.showInputDialog("Enter Account Number"));
+		try {
+			existingRecord = readFile();
+			for (Customer customer : existingRecord) {
+				if (customerID == customer.getCustomerID() && acNo == customer.getAccountNumber()) {
+					
+					JOptionPane.showMessageDialog(null, " Hi " + customer.getCustomerName() + " \n"+customer.toString());
+				}
+					
+				}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -20,9 +20,9 @@ public class BankManagment {
 				  
 				  String inputChoice = JOptionPane.showInputDialog(
 							"Please choose any of the option from below:\n 1. Create Account\n 2. Deposit money\n 3. Display Current Balance\n 4. Withdraw Money\n"
-									+ " 5. Transfer Money to other account\n 6. Add UtilityBill to your Account \n 7. Pay utility Bills \n 9. Exit\n"
-									+ "\nAdditional Feature\n"
-									+ "8. Edit Your Address Details");
+									+ " 5. Transfer Money to other account\n 6. Add UtilityBill to your Account \n 7. Pay utility Bills \n"
+								
+									+ " 8. Edit Your Address Details\n 9. Display Details\n 10.exit");
 					choice = Integer.parseInt(inputChoice);
 	              
 	              switch(choice) {
@@ -50,11 +50,13 @@ public class BankManagment {
 	              			break;
 	              case 8: op.editAddress();
         			break;
+	              case 9: op.displayDetails();
+      			break;
 				default: 
 					break;
 	       
 	              }
-			  }while(choice!=9);
+			  }while(choice!=10);
 		  } catch (Exception e) {
 			System.out.println();
 		}
