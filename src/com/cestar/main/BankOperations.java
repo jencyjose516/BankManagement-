@@ -37,21 +37,27 @@ public class BankOperations {
 			customer.setCustomerName(JOptionPane.showInputDialog("Enter your Name : "));
 
 			String[] options = { "Savings", "Chequeing", "Current", "Loan" };
-			ImageIcon icon = new ImageIcon("src/images/turtle32.png");
-
 			String type = (String) JOptionPane.showInputDialog(null, "Enter the Accout Type??", "",
-					JOptionPane.QUESTION_MESSAGE, icon, options, options[2]);
+					JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
 
-			if (type.equalsIgnoreCase("savings"))
-
+			if (type.equalsIgnoreCase("savings")) {
 				customer.setAccountType(AccountType.SAVINGS_ACCOUNT.getAccountType());
-			else if (type.equalsIgnoreCase("Chequeing"))
+				JOptionPane.showMessageDialog(null, "Hi, You have selected Savings account: Please enter other details");
+				
+			}else if (type.equalsIgnoreCase("Chequeing")) {
 				customer.setAccountType(AccountType.CHEQUEING_ACCOUNT.getAccountType());
-			else if (type.equalsIgnoreCase("Current"))
-				customer.setAccountType(AccountType.CURRENT_ACCOUNT.getAccountType());
+				JOptionPane.showMessageDialog(null, "Hi, You have selected Chequeing account: Please enter other details");
 
-			else if (type.equalsIgnoreCase("Loan"))
+			}else if (type.equalsIgnoreCase("Current")) {
+				customer.setAccountType(AccountType.CURRENT_ACCOUNT.getAccountType());
+				JOptionPane.showMessageDialog(null, "Hi, You have selected Current account: Please enter other details");
+
+			}else if (type.equalsIgnoreCase("Loan")) {
 				customer.setAccountType(AccountType.LOAN_ACCOUNT.getAccountType());
+				JOptionPane.showMessageDialog(null, "Hi, You have selected Loan account: Please enter other details");
+
+			}
+				
 
 			customer.setAccountNumber((int) ((Math.random() * 9000) + 10000));
 			customer.setCustomerID((int) ((Math.random() * 9000) + 200));
@@ -74,14 +80,13 @@ public class BankOperations {
 					+ "\n Your Account Number is :   " + customer.getAccountNumber());
 			doWriteFile(customer);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Sorry ! Account creation failed");
 		}
 
 	}
 
 	private void doWriteFile(Customer newCustomerObject) throws IOException {
-		FileWriter fstream;
+		//FileWriter fstream;
 		try {
 			Set<Customer> existingRecord = new HashSet<>();
 			Set<Customer> newRecordSet = new HashSet<>();
