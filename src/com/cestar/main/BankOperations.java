@@ -1,7 +1,7 @@
 package com.cestar.main;
 
 /*
- * @author jency
+@author jency, Jithu, Akhil, Chinju
  */
 import java.io.File;
 import java.io.FileInputStream;
@@ -297,7 +297,7 @@ public class BankOperations {
 						customer.setNextUtility(nextUtility);
 						doWriteFile(customer);
 
-						JOptionPane.showMessageDialog(null, " Hi " + customer.getCustomerName() + " \n"
+						JOptionPane.showMessageDialog(null, "Hi " + customer.getCustomerName() + " \n"
 								+ "You have Paid the utility bill of " + customer.getUtilityAmount());
 						
 						break;

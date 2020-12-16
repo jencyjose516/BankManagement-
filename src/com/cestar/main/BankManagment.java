@@ -6,7 +6,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /*
- * @author Jency 
+ * @author jency, Jithu, Akhil, Chinju
  */
 public class BankManagment {
 

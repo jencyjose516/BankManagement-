@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author DELL
+ * @author jency, Jithu, Akhil, Chinju
  *
  */
 public class Customer implements Serializable{
