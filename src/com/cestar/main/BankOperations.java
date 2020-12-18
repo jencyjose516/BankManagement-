@@ -262,7 +262,6 @@ public class BankOperations {
 					
 				}
 
-				break;
 			}
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
